@@ -1,0 +1,9 @@
+{
+    "NO ENFERMO": 0,
+    "ENFERMEDAD LEVE": 0,
+    "ENFERMEDAD AGUDA": 0,
+    "ENFERMEDAD CRÓNICA": 0,
+    "ENFERMEDAD TERMINAL": 0,
+    "ultimas_predicciones": [],
+    "ultima_fecha": ""
+}
