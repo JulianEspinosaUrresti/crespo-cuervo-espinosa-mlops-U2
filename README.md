@@ -1,133 +1,97 @@
-# Servicio Médico con Docker
+# Servicio Médico con Docker y GitHub Actions
 
----
+## Descripción del proyecto
 
-# Descripción del proyecto
+Este proyecto implementa un servicio médico simple que simula un modelo de predicción de enfermedades utilizando Python, Flask, Docker y GitHub Actions.
 
-Este proyecto implementa un servicio médico simple que permite simular un modelo de predicción de enfermedades utilizando Python, Flask y Docker.
+La aplicación permite ingresar variables clínicas básicas de un paciente y retorna una clasificación del estado del paciente.
 
-La aplicación recibe información clínica básica de un paciente y retorna una clasificación automática del estado del paciente.
+## Estados posibles del modelo
 
-El sistema puede retornar uno de los siguientes estados:
+El sistema puede retornar una de las siguientes categorías:
 
 - NO ENFERMO
 - ENFERMEDAD LEVE
 - ENFERMEDAD AGUDA
 - ENFERMEDAD CRÓNICA
+- ENFERMEDAD TERMINAL
 
-La solución fue desarrollada como parte de un ejercicio académico orientado a MLOps y contenerización con Docker.
+## Variables utilizadas
 
----
+| Variable | Descripción |
+|---|---|
+| temperatura | Temperatura corporal del paciente |
+| frecuencia_cardiaca | Pulsaciones por minuto |
+| oxigeno | Saturación de oxígeno |
 
-# Tecnologías utilizadas
+## Funcionalidades
 
-- Python 3.11
-- Flask
-- Docker
+- Formulario web para ingresar datos del paciente.
+- Endpoint API para realizar predicciones.
+- Registro de estadísticas por categoría.
+- Consulta de últimas 5 predicciones.
+- Registro de fecha de última predicción.
+- Pruebas unitarias con pytest.
+- Construcción de imagen Docker.
+- Pipeline CI/CD con GitHub Actions.
 
----
-
-# Estructura del proyecto
+## Estructura del repositorio
 
 ```text
-mlops_docker_medico_grupo2/
+crespo-cuervo-espinosa-mlops-U2/
 │
 ├── app.py
 ├── modelo.py
 ├── requirements.txt
 ├── Dockerfile
 ├── README.md
-└── propuesta_tecnica.md
+├── estadisticas.json
+├── tests/
+│   └── test_modelo.py
+└── .github/
+    └── workflows/
+        └── ci.yml
 ```
 
----
+## Ejecución local sin Docker
 
-# Explicación de archivos
+Instalar dependencias:
 
-| Archivo | Función |
-|---|---|
-| app.py | Aplicación principal y servicio web |
-| modelo.py | Simulación del modelo de predicción |
-| requirements.txt | Dependencias necesarias |
-| Dockerfile | Construcción de la imagen Docker |
-| README.md | Documentación del proyecto |
-| propuesta_tecnica.md | Explicación del pipeline MLOps |
+```bash
+pip install -r requirements.txt
+```
 
----
+Ejecutar la aplicación:
 
-# Variables utilizadas
+```bash
+python app.py
+```
 
-El sistema utiliza las siguientes variables clínicas:
+Abrir en el navegador:
 
-| Variable | Descripción |
-|---|---|
-| temperatura | Temperatura corporal |
-| frecuencia_cardiaca | Pulsaciones por minuto |
-| oxigeno | Saturación de oxígeno |
+```text
+http://127.0.0.1:5000
+```
 
----
-
-# Estados posibles
-
-El sistema puede retornar:
-
-- NO ENFERMO
-- ENFERMEDAD LEVE
-- ENFERMEDAD AGUDA
-- ENFERMEDAD CRÓNICA
-
----
-
-# Requisitos previos
-
-Antes de ejecutar el proyecto es necesario tener instalado:
-
-- Docker Desktop
-- WSL2 habilitado en Windows
-
----
-
-# Construcción de la imagen Docker
-
-Ubicarse en la carpeta del proyecto y ejecutar:
+## Construcción de la imagen Docker
 
 ```bash
 docker build -t modelo-medico .
 ```
 
----
-
-# Ejecución del contenedor
-
-Ejecutar:
+## Ejecución con Docker
 
 ```bash
 docker run -p 5000:5000 modelo-medico
 ```
 
----
-
-# Acceso al servicio web
-
-Abrir el navegador y acceder a:
+Abrir en el navegador:
 
 ```text
-http://localhost:5000
+http://127.0.0.1:5000
 ```
 
-La aplicación mostrará un formulario donde el médico podrá ingresar:
-
-- Temperatura corporal
-- Frecuencia cardíaca
-- Nivel de oxígeno
-
-Luego el sistema mostrará automáticamente el resultado de la evaluación.
-
----
-
-# Uso del endpoint API
-
-También es posible consumir el servicio mediante API REST.
+## Uso del endpoint de predicción
 
 Endpoint:
 
@@ -135,76 +99,82 @@ Endpoint:
 POST /evaluar
 ```
 
-Ejemplo usando PowerShell:
+Ejemplo en PowerShell:
 
 ```powershell
 Invoke-RestMethod `
--Uri "http://localhost:5000/evaluar" `
+-Uri "http://127.0.0.1:5000/evaluar" `
 -Method POST `
 -ContentType "application/json" `
--Body '{"temperatura":39,"frecuencia_cardiaca":120,"oxigeno":90}'
+-Body '{"temperatura":39,"frecuencia_cardiaca":130,"oxigeno":80}'
 ```
 
----
-
-# Respuesta esperada
+Respuesta esperada:
 
 ```json
 {
-    "resultado": "ENFERMEDAD AGUDA"
+  "resultado": "ENFERMEDAD TERMINAL"
 }
 ```
 
----
+## Endpoint de estadísticas
 
-# Ejemplo de funcionamiento
+Endpoint:
 
-| Temperatura | Frecuencia cardíaca | Oxígeno | Resultado |
-|---|---|---|---|
-| 36 | 80 | 97 | NO ENFERMO |
-| 37.5 | 90 | 95 | ENFERMEDAD LEVE |
-| 39 | 120 | 90 | ENFERMEDAD AGUDA |
+```text
+GET /estadisticas
+```
 
----
+Permite consultar:
 
-# Posibles mejoras futuras
+- Número total de predicciones por categoría.
+- Últimas 5 predicciones realizadas.
+- Fecha de la última predicción.
 
-La solución puede evolucionar hacia:
+Ejemplo:
 
-- Integración con modelos reales de Machine Learning.
-- Conexión con bases de datos médicas.
-- Historial clínico.
-- Despliegue en nube.
-- Monitoreo de modelos.
-- Reentrenamiento automático.
+```text
+http://127.0.0.1:5000/estadisticas
+```
 
-## Consideración sobre enfermedades huérfanas
+## Pruebas unitarias
 
-La solución desarrollada para esta actividad utiliza una simulación basada en reglas y no un modelo real entrenado con datos clínicos.
+Ejecutar:
 
-Sin embargo, la arquitectura propuesta queda preparada para futuras integraciones con modelos de Machine Learning especializados en escenarios con:
+```bash
+python -m pytest
+```
 
-- Grandes volúmenes de datos (enfermedades comunes).
-- Pocos datos disponibles (enfermedades huérfanas).
+El proyecto incluye pruebas para validar que el modelo retorne categorías esperadas.
 
-En un escenario real, podrían utilizarse técnicas como:
+## CI/CD con GitHub Actions
 
-- Transfer Learning.
-- Few-Shot Learning.
-- Data Augmentation.
-- Modelos preentrenados.
-- Aprendizaje semi-supervisado.
+El repositorio incluye un workflow de GitHub Actions ubicado en:
 
-Estas técnicas permiten construir modelos capaces de trabajar incluso cuando la cantidad de información disponible es reducida.
+```text
+.github/workflows/ci.yml
+```
 
----
+El pipeline se ejecuta automáticamente en:
 
-# Conclusión
+- Pull Requests hacia `main`.
+- Pushes hacia `main`.
 
-La solución desarrollada permite implementar un servicio médico portable utilizando Docker, Flask y Python.
+El pipeline realiza:
 
-El sistema cumple con los requisitos de contenerización, exposición del servicio y simulación de un modelo predictivo definidos en la actividad académica.
+1. Clonación del repositorio.
+2. Configuración de Python.
+3. Instalación de dependencias.
+4. Ejecución de pruebas unitarias.
+5. Construcción de la imagen Docker.
 
-## Rama solucion-inicial
+## Ramas utilizadas
 
-Esta rama contiene la primera versión funcional del servicio médico con Docker.
+- `main`: rama principal.
+- `solucion-inicial`: primera versión funcional del servicio.
+- `segunda-version`: incorporación de nueva categoría y estadísticas.
+- `añadir-github-actions`: configuración del pipeline CI/CD.
+
+## Conclusión
+
+La solución cumple con los requerimientos de la Entrega 2, al incluir control de versiones en GitHub, evolución del modelo, estadísticas de predicción, pruebas unitarias y automatización mediante GitHub Actions.
