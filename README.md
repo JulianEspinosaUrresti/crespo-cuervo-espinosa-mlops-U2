@@ -204,3 +204,7 @@ Estas técnicas permiten construir modelos capaces de trabajar incluso cuando la
 La solución desarrollada permite implementar un servicio médico portable utilizando Docker, Flask y Python.
 
 El sistema cumple con los requisitos de contenerización, exposición del servicio y simulación de un modelo predictivo definidos en la actividad académica.
+
+## Rama solucion-inicial
+
+Esta rama contiene la primera versión funcional del servicio médico con Docker.
