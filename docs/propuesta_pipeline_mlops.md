@@ -1,398 +1,188 @@
-\# Propuesta de Pipeline de MLOps
+\# Diagrama General del Pipeline de MLOps
 
 
 
-\## 1. Contexto
+```text
 
+&#x20;                   ┌─────────────────────┐
 
+&#x20;                   │  Fuentes de Datos   │
 
-La solución inicial desarrollada por el equipo consistía en un servicio web implementado en Flask y Docker que simulaba un modelo de predicción médica basado en reglas.
+&#x20;                   │                     │
 
+&#x20;                   │ • Historias clínicas│
 
+&#x20;                   │ • Laboratorios      │
 
-Aunque esta aproximación permitía demostrar el funcionamiento general de un servicio predictivo, no contemplaba los procesos necesarios para administrar el ciclo de vida completo de un modelo de Machine Learning en ambientes productivos.
+&#x20;                   │ • Registros médicos │
 
+&#x20;                   └──────────┬──────────┘
 
+&#x20;                              │
 
-Por esta razón se propone una arquitectura MLOps que permita gestionar de forma integral los datos, modelos, despliegues y monitoreo.
+&#x20;                              ▼
 
+&#x20;                   ┌─────────────────────┐
 
+&#x20;                   │ Ingesta de Datos    │
 
-\---
+&#x20;                   │ PostgreSQL          │
 
+&#x20;                   └──────────┬──────────┘
 
+&#x20;                              │
 
-\# 2. Objetivo
+&#x20;                              ▼
 
+&#x20;                   ┌─────────────────────┐
 
+&#x20;                   │ Validación Datos    │
 
-Diseñar un pipeline de MLOps capaz de soportar el ciclo de vida completo de modelos destinados a la predicción de enfermedades comunes y enfermedades huérfanas.
+&#x20;                   │ Great Expectations  │
 
+&#x20;                   └──────────┬──────────┘
 
+&#x20;                              │
 
-\---
+&#x20;                              ▼
 
+&#x20;                   ┌─────────────────────┐
 
+&#x20;                   │ Feature Engineering │
 
-\# 3. Arquitectura General
+&#x20;                   │ Pandas / Sklearn    │
 
+&#x20;                   └──────────┬──────────┘
 
+&#x20;                              │
 
-El pipeline estará compuesto por las siguientes etapas:
+&#x20;                              ▼
 
+&#x20;                   ┌─────────────────────┐
 
+&#x20;                   │ Entrenamiento       │
 
-1\. Ingesta de datos.
+&#x20;                   │ RF / XGBoost        │
 
-2\. Validación de datos.
+&#x20;                   └──────────┬──────────┘
 
-3\. Procesamiento y transformación.
+&#x20;                              │
 
-4\. Entrenamiento.
+&#x20;                              ▼
 
-5\. Evaluación.
+&#x20;                   ┌─────────────────────┐
 
-6\. Registro de modelos.
+&#x20;                   │ Evaluación          │
 
-7\. Integración continua.
+&#x20;                   │ Accuracy/F1/Recall  │
 
-8\. Despliegue continuo.
+&#x20;                   └──────────┬──────────┘
 
-9\. Monitoreo.
+&#x20;                              │
 
-10\. Reentrenamiento.
+&#x20;                              ▼
 
+&#x20;                   ┌─────────────────────┐
 
+&#x20;                   │ MLflow Registry     │
 
-\---
+&#x20;                   │ Versionamiento      │
 
+&#x20;                   └──────────┬──────────┘
 
+&#x20;                              │
 
-\# 4. Ingesta de Datos
+&#x20;                              ▼
 
+&#x20;                   ┌─────────────────────┐
 
+&#x20;                   │ GitHub Actions      │
 
-Los datos podrán provenir de:
+&#x20;                   │ CI/CD               │
 
+&#x20;                   └──────────┬──────────┘
 
+&#x20;                              │
 
-\- Historias clínicas.
+&#x20;                              ▼
 
-\- Laboratorios.
+&#x20;                   ┌─────────────────────┐
 
-\- Registros hospitalarios.
+&#x20;                   │ Docker + FastAPI    │
 
-\- Sistemas externos de salud.
+&#x20;                   └──────────┬──────────┘
 
+&#x20;                              │
 
+&#x20;                              ▼
 
-Tecnología propuesta:
+&#x20;                   ┌─────────────────────┐
 
+&#x20;                   │ Kubernetes          │
 
+&#x20;                   └──────────┬──────────┘
 
-\- PostgreSQL.
+&#x20;                              │
 
+&#x20;                              ▼
 
+&#x20;                   ┌─────────────────────┐
 
-Justificación:
+&#x20;                   │ Médico / Usuario    │
 
+&#x20;                   └──────────┬──────────┘
 
+&#x20;                              │
 
-Permite almacenar información estructurada y facilita la integración con herramientas de Machine Learning.
+&#x20;                              ▼
 
+&#x20;                   ┌─────────────────────┐
 
+&#x20;                   │ Monitoreo           │
 
-\---
+&#x20;                   │ Prometheus/Grafana  │
 
+&#x20;                   └──────────┬──────────┘
 
+&#x20;                              │
 
-\# 5. Validación de Datos
+&#x20;                              ▼
 
+&#x20;                   ┌─────────────────────┐
 
+&#x20;                   │ Reentrenamiento     │
 
-Antes del entrenamiento se validarán:
+&#x20;                   └─────────────────────┘
 
+```
 
 
-\- Campos vacíos.
 
-\- Valores fuera de rango.
+\## Flujo General
 
-\- Datos duplicados.
 
-\- Inconsistencias clínicas.
 
+1\. Los datos clínicos son capturados desde diferentes fuentes.
 
+2\. Se almacenan en PostgreSQL.
 
-Tecnología propuesta:
+3\. Se validan mediante Great Expectations.
 
+4\. Se transforman mediante procesos de Feature Engineering.
 
+5\. Se entrena el modelo.
 
-\- Great Expectations.
+6\. Se evalúan métricas de desempeño.
 
+7\. El modelo se registra en MLflow.
 
+8\. GitHub Actions automatiza CI/CD.
 
-Justificación:
+9\. Docker y FastAPI permiten el despliegue.
 
+10\. Kubernetes administra la ejecución.
 
+11\. Prometheus y Grafana monitorean el comportamiento.
 
-Permite automatizar controles de calidad de datos.
-
-
-
-\---
-
-
-
-\# 6. Procesamiento de Datos
-
-
-
-Actividades:
-
-
-
-\- Limpieza.
-
-\- Normalización.
-
-\- Codificación de variables.
-
-\- Balanceo de clases.
-
-
-
-Tecnologías:
-
-
-
-\- Pandas.
-
-\- Scikit-Learn.
-
-
-
-\---
-
-
-
-\# 7. Entrenamiento
-
-
-
-Para enfermedades comunes:
-
-
-
-\- Random Forest.
-
-\- XGBoost.
-
-
-
-Para enfermedades huérfanas:
-
-
-
-\- Transfer Learning.
-
-\- Few-Shot Learning.
-
-
-
-Justificación:
-
-
-
-Permiten trabajar tanto con grandes cantidades de información como con escenarios donde los datos son escasos.
-
-
-
-\---
-
-
-
-\# 8. Evaluación
-
-
-
-Métricas consideradas:
-
-
-
-\- Accuracy.
-
-\- Precision.
-
-\- Recall.
-
-\- F1 Score.
-
-\- ROC AUC.
-
-
-
-\---
-
-
-
-\# 9. Registro de Modelos
-
-
-
-Tecnología:
-
-
-
-\- MLflow.
-
-
-
-Funcionalidades:
-
-
-
-\- Versionamiento.
-
-\- Comparación de experimentos.
-
-\- Registro de métricas.
-
-\- Gestión de artefactos.
-
-
-
-\---
-
-
-
-\# 10. Integración Continua
-
-
-
-Tecnología:
-
-
-
-\- GitHub Actions.
-
-
-
-Actividades:
-
-
-
-\- Validación automática.
-
-\- Pruebas unitarias.
-
-\- Construcción de contenedores.
-
-
-
-\---
-
-
-
-\# 11. Despliegue Continuo
-
-
-
-Tecnologías:
-
-
-
-\- Docker.
-
-\- Kubernetes.
-
-\- FastAPI.
-
-
-
-El médico podrá acceder al sistema mediante:
-
-
-
-\- Ejecución local.
-
-\- Consumo remoto mediante API.
-
-
-
-\---
-
-
-
-\# 12. Monitoreo
-
-
-
-Tecnologías:
-
-
-
-\- Prometheus.
-
-\- Grafana.
-
-
-
-Variables monitoreadas:
-
-
-
-\- Latencia.
-
-\- Errores.
-
-\- Disponibilidad.
-
-\- Drift de datos.
-
-
-
-\---
-
-
-
-\# 13. Reentrenamiento
-
-
-
-Cuando se detecte degradación del modelo:
-
-
-
-1\. Recolección de nuevos datos.
-
-2\. Nuevo entrenamiento.
-
-3\. Evaluación.
-
-4\. Registro.
-
-5\. Despliegue.
-
-
-
-\---
-
-
-
-\# 14. Beneficios
-
-
-
-\- Escalabilidad.
-
-\- Reproducibilidad.
-
-\- Trazabilidad.
-
-\- Automatización.
-
-\- Gobierno del modelo.
-
-\- Mantenimiento continuo.
+12\. Ante degradación del desempeño se activa un nuevo ciclo de entrenamiento.
 
