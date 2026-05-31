@@ -8,7 +8,7 @@
 
 | Componente | Propuesta Inicial | Propuesta Reestructurada |
 
-|------------|------------------|--------------------------|
+|------------|-------------------|--------------------------|
 
 | Modelo | Simulación basada en reglas | Modelos de Machine Learning entrenados |
 
@@ -41,8 +41,6 @@
 | Escalabilidad | Limitada a contenedor local | Escalable mediante Kubernetes |
 
 | Gobierno del modelo | No existe | Versionamiento y trazabilidad completa |
-
-
 
 \---
 
