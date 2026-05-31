@@ -10,10 +10,6 @@ La propuesta de reestructuración MLOps se construye sobre un conjunto de supues
 
 
 
-\---
-
-
-
 \# Supuestos del Problema
 
 
@@ -27,10 +23,6 @@ Se asume que existen registros clínicos históricos suficientes para entrenar m
 
 
 Para el caso de enfermedades huérfanas, se asume que la cantidad de registros disponibles es significativamente menor, por lo que podrían requerirse técnicas especializadas como Transfer Learning o Few-Shot Learning.
-
-
-
-\---
 
 
 
@@ -58,10 +50,6 @@ Por esta razón se incorpora una etapa formal de validación y control de calida
 
 
 
-\---
-
-
-
 \## Infraestructura
 
 
@@ -79,10 +67,6 @@ Se asume que la solución podrá ejecutarse en diferentes entornos tecnológicos
 
 
 La arquitectura propuesta busca mantener independencia del entorno de ejecución mediante el uso de contenedores.
-
-
-
-\---
 
 
 
@@ -105,10 +89,6 @@ Se asume que los principales usuarios de la solución serán:
 
 
 Estos usuarios requerirán resultados rápidos, confiables y fácilmente interpretables.
-
-
-
-\---
 
 
 
@@ -136,10 +116,6 @@ PostgreSQL es una plataforma robusta, ampliamente utilizada en entornos empresar
 
 
 
-\---
-
-
-
 \## Great Expectations
 
 
@@ -160,10 +136,6 @@ Permite automatizar controles de calidad, generar evidencia de validación y det
 
 
 
-\---
-
-
-
 \## Pandas y Scikit-Learn
 
 
@@ -181,10 +153,6 @@ Utilizar Pandas y Scikit-Learn para el procesamiento y modelado de datos.
 
 
 Son herramientas estándar dentro del ecosistema de Machine Learning y cuentan con amplia adopción en entornos académicos e industriales.
-
-
-
-\---
 
 
 
@@ -218,10 +186,6 @@ Permite:
 
 
 
-\---
-
-
-
 \## GitHub Actions
 
 
@@ -239,10 +203,6 @@ Automatizar procesos mediante GitHub Actions.
 
 
 Facilita la implementación de prácticas de Integración Continua (CI) y Despliegue Continuo (CD), reduciendo errores manuales y mejorando la calidad del software.
-
-
-
-\---
 
 
 
@@ -266,10 +226,6 @@ Garantiza portabilidad, reproducibilidad y consistencia entre ambientes de desar
 
 
 
-\---
-
-
-
 \## Kubernetes
 
 
@@ -290,10 +246,6 @@ Permite administrar despliegues escalables, tolerantes a fallos y preparados par
 
 
 
-\---
-
-
-
 \## FastAPI
 
 
@@ -311,10 +263,6 @@ Utilizar FastAPI como framework para exponer servicios REST.
 
 
 Ofrece alto desempeño, facilidad de integración y documentación automática de APIs.
-
-
-
-\---
 
 
 
@@ -348,10 +296,6 @@ Permiten supervisar:
 
 
 
-\---
-
-
-
 \# Beneficios Esperados
 
 
@@ -373,10 +317,6 @@ La adopción de esta arquitectura MLOps permitirá:
 \- Mejor gobierno y control de versiones.
 
 \- Monitoreo continuo de los modelos desplegados.
-
-
-
-\---
 
 
 
