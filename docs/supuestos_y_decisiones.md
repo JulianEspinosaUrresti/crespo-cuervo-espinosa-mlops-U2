@@ -2,27 +2,43 @@
 
 
 
-\## Supuestos del Problema
+\## Introducción
 
 
 
-\### Disponibilidad de datos
+La propuesta de reestructuración MLOps se construye sobre un conjunto de supuestos relacionados con la disponibilidad de datos, la infraestructura tecnológica y los usuarios finales del sistema. Asimismo, se documentan las principales decisiones tecnológicas adoptadas para garantizar trazabilidad, escalabilidad, reproducibilidad y mantenimiento continuo de los modelos de Machine Learning.
 
 
 
-Se asume que existen registros clínicos históricos suficientes para entrenar modelos destinados a enfermedades comunes.
+\---
 
 
 
-Para enfermedades huérfanas se asume que la cantidad de registros disponibles es significativamente menor.
+\# Supuestos del Problema
 
 
 
-\### Calidad de los datos
+\## Disponibilidad de Datos
 
 
 
-Se asume que los datos clínicos pueden contener:
+Se asume que existen registros clínicos históricos suficientes para entrenar modelos destinados a la predicción de enfermedades comunes.
+
+
+
+Para el caso de enfermedades huérfanas, se asume que la cantidad de registros disponibles es significativamente menor, por lo que podrían requerirse técnicas especializadas como Transfer Learning o Few-Shot Learning.
+
+
+
+\---
+
+
+
+\## Calidad de los Datos
+
+
+
+Se asume que la información clínica puede presentar problemas de calidad típicos en sistemas de información hospitalarios, tales como:
 
 
 
@@ -30,37 +46,51 @@ Se asume que los datos clínicos pueden contener:
 
 \- Registros duplicados.
 
-\- Valores fuera de rango.
-
 \- Errores de digitación.
 
+\- Valores fuera de rango.
 
-
-Por esta razón se incorpora una etapa formal de validación de datos.
-
-
-
-\### Infraestructura
+\- Inconsistencias entre fuentes de información.
 
 
 
-Se asume que la solución podrá ejecutarse tanto:
+Por esta razón se incorpora una etapa formal de validación y control de calidad de datos dentro del pipeline.
 
 
 
-\- Localmente en el computador del médico.
-
-\- En servidores institucionales.
-
-\- En infraestructura cloud.
+\---
 
 
 
-\### Usuarios finales
+\## Infraestructura
 
 
 
-Se asume que los usuarios principales serán:
+Se asume que la solución podrá ejecutarse en diferentes entornos tecnológicos:
+
+
+
+\- Equipos locales utilizados por personal médico.
+
+\- Servidores institucionales.
+
+\- Infraestructura cloud.
+
+
+
+La arquitectura propuesta busca mantener independencia del entorno de ejecución mediante el uso de contenedores.
+
+
+
+\---
+
+
+
+\## Usuarios Finales
+
+
+
+Se asume que los principales usuarios de la solución serán:
 
 
 
@@ -69,6 +99,12 @@ Se asume que los usuarios principales serán:
 \- Personal clínico.
 
 \- Investigadores.
+
+\- Instituciones prestadoras de servicios de salud.
+
+
+
+Estos usuarios requerirán resultados rápidos, confiables y fácilmente interpretables.
 
 
 
@@ -84,7 +120,23 @@ Se asume que los usuarios principales serán:
 
 
 
-Seleccionado por ser una base de datos relacional ampliamente utilizada y adecuada para almacenar información clínica estructurada.
+\### Decisión
+
+
+
+Utilizar PostgreSQL como sistema gestor de bases de datos.
+
+
+
+\### Justificación
+
+
+
+PostgreSQL es una plataforma robusta, ampliamente utilizada en entornos empresariales y adecuada para almacenar grandes volúmenes de información clínica estructurada.
+
+
+
+\---
 
 
 
@@ -92,7 +144,23 @@ Seleccionado por ser una base de datos relacional ampliamente utilizada y adecua
 
 
 
-Seleccionado para automatizar la validación de calidad de datos antes del entrenamiento.
+\### Decisión
+
+
+
+Incorporar Great Expectations como herramienta de validación de datos.
+
+
+
+\### Justificación
+
+
+
+Permite automatizar controles de calidad, generar evidencia de validación y detectar inconsistencias antes del entrenamiento de los modelos.
+
+
+
+\---
 
 
 
@@ -100,7 +168,23 @@ Seleccionado para automatizar la validación de calidad de datos antes del entre
 
 
 
-Seleccionados por ser herramientas estándar para procesamiento y modelado de datos.
+\### Decisión
+
+
+
+Utilizar Pandas y Scikit-Learn para el procesamiento y modelado de datos.
+
+
+
+\### Justificación
+
+
+
+Son herramientas estándar dentro del ecosistema de Machine Learning y cuentan con amplia adopción en entornos académicos e industriales.
+
+
+
+\---
 
 
 
@@ -108,17 +192,33 @@ Seleccionados por ser herramientas estándar para procesamiento y modelado de da
 
 
 
-Seleccionado para:
+\### Decisión
 
 
 
-\- Versionar modelos.
+Implementar MLflow para la gestión del ciclo de vida de los modelos.
+
+
+
+\### Justificación
+
+
+
+Permite:
+
+
 
 \- Registrar experimentos.
 
 \- Comparar ejecuciones.
 
-\- Mantener trazabilidad.
+\- Versionar modelos.
+
+\- Mantener trazabilidad de resultados.
+
+
+
+\---
 
 
 
@@ -126,7 +226,23 @@ Seleccionado para:
 
 
 
-Seleccionado para automatizar pruebas y despliegues.
+\### Decisión
+
+
+
+Automatizar procesos mediante GitHub Actions.
+
+
+
+\### Justificación
+
+
+
+Facilita la implementación de prácticas de Integración Continua (CI) y Despliegue Continuo (CD), reduciendo errores manuales y mejorando la calidad del software.
+
+
+
+\---
 
 
 
@@ -134,7 +250,23 @@ Seleccionado para automatizar pruebas y despliegues.
 
 
 
-Seleccionado para garantizar portabilidad y reproducibilidad.
+\### Decisión
+
+
+
+Utilizar Docker para la contenerización de la solución.
+
+
+
+\### Justificación
+
+
+
+Garantiza portabilidad, reproducibilidad y consistencia entre ambientes de desarrollo, pruebas y producción.
+
+
+
+\---
 
 
 
@@ -142,7 +274,23 @@ Seleccionado para garantizar portabilidad y reproducibilidad.
 
 
 
-Seleccionado para administrar despliegues escalables.
+\### Decisión
+
+
+
+Utilizar Kubernetes para la orquestación de contenedores.
+
+
+
+\### Justificación
+
+
+
+Permite administrar despliegues escalables, tolerantes a fallos y preparados para crecimiento futuro.
+
+
+
+\---
 
 
 
@@ -150,7 +298,23 @@ Seleccionado para administrar despliegues escalables.
 
 
 
-Seleccionado por su alto desempeño y facilidad para exponer servicios REST.
+\### Decisión
+
+
+
+Utilizar FastAPI como framework para exponer servicios REST.
+
+
+
+\### Justificación
+
+
+
+Ofrece alto desempeño, facilidad de integración y documentación automática de APIs.
+
+
+
+\---
 
 
 
@@ -158,7 +322,29 @@ Seleccionado por su alto desempeño y facilidad para exponer servicios REST.
 
 
 
-Seleccionados para monitoreo operacional y detección de degradación del modelo.
+\### Decisión
+
+
+
+Incorporar herramientas de monitoreo operacional.
+
+
+
+\### Justificación
+
+
+
+Permiten supervisar:
+
+
+
+\- Disponibilidad del servicio.
+
+\- Consumo de recursos.
+
+\- Latencia.
+
+\- Comportamiento del modelo en producción.
 
 
 
@@ -170,15 +356,33 @@ Seleccionados para monitoreo operacional y detección de degradación del modelo
 
 
 
-\- Mayor trazabilidad.
+La adopción de esta arquitectura MLOps permitirá:
 
-\- Mayor reproducibilidad.
+
+
+\- Mayor trazabilidad de los modelos.
+
+\- Reproducibilidad de experimentos.
 
 \- Reducción de errores manuales.
 
-\- Automatización del ciclo de vida del modelo.
+\- Automatización del ciclo de vida de Machine Learning.
 
-\- Escalabilidad futura.
+\- Escalabilidad de la solución.
 
-\- Gobierno y control de versiones.
+\- Mejor gobierno y control de versiones.
+
+\- Monitoreo continuo de los modelos desplegados.
+
+
+
+\---
+
+
+
+\# Conclusión
+
+
+
+Las decisiones tecnológicas adoptadas buscan transformar la solución inicial basada en Flask y Docker en una arquitectura MLOps completa, capaz de gestionar de manera eficiente el ciclo de vida de modelos de Machine Learning para la predicción de enfermedades comunes y huérfanas.
 
