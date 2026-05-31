@@ -6,41 +6,323 @@
 
 
 
-| Componente | Propuesta Inicial | Propuesta Reestructurada |
+\### Modelo
 
-|------------|-------------------|--------------------------|
 
-| Modelo | Simulación basada en reglas | Modelos de Machine Learning entrenados |
 
-| Framework API | Flask | FastAPI |
+\*\*Propuesta Inicial\*\*
 
-| Contenerización | Docker | Docker + Kubernetes |
+\- Simulación basada en reglas.
 
-| Datos | Entrada manual desde formulario | Pipeline de datos estructurado |
 
-| Validación de datos | No implementada | Great Expectations |
 
-| Procesamiento | No definido formalmente | Pandas y Scikit-Learn |
+\*\*Propuesta Reestructurada\*\*
 
-| Entrenamiento | No existe | Pipeline automatizado |
+\- Modelos de Machine Learning entrenados.
 
-| Evaluación | No existe | Accuracy, Precision, Recall, F1 y ROC-AUC |
 
-| Versionamiento de modelos | No existe | MLflow Model Registry |
 
-| Seguimiento de experimentos | No existe | MLflow Tracking |
+\---
 
-| Integración Continua | No existe | GitHub Actions |
 
-| Despliegue Continuo | No existe | GitHub Actions + Docker |
 
-| Monitoreo | No existe | Prometheus y Grafana |
+\### Framework API
 
-| Reentrenamiento | No existe | Reentrenamiento basado en monitoreo |
 
-| Escalabilidad | Limitada a contenedor local | Escalable mediante Kubernetes |
 
-| Gobierno del modelo | No existe | Versionamiento y trazabilidad completa |
+\*\*Propuesta Inicial\*\*
+
+\- Flask.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- FastAPI.
+
+
+
+\---
+
+
+
+\### Contenerización
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- Docker.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- Docker + Kubernetes.
+
+
+
+\---
+
+
+
+\### Gestión de Datos
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- Entrada manual desde formulario.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- Pipeline de datos estructurado.
+
+
+
+\---
+
+
+
+\### Validación de Datos
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- No implementada.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- Great Expectations.
+
+
+
+\---
+
+
+
+\### Procesamiento
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- No definido formalmente.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- Pandas y Scikit-Learn.
+
+
+
+\---
+
+
+
+\### Entrenamiento
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- No existe.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- Pipeline automatizado.
+
+
+
+\---
+
+
+
+\### Evaluación
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- No existe.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- Accuracy, Precision, Recall, F1 Score y ROC-AUC.
+
+
+
+\---
+
+
+
+\### Versionamiento de Modelos
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- No existe.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- MLflow Model Registry.
+
+
+
+\---
+
+
+
+\### Seguimiento de Experimentos
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- No existe.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- MLflow Tracking.
+
+
+
+\---
+
+
+
+\### Integración Continua
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- No existe.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- GitHub Actions.
+
+
+
+\---
+
+
+
+\### Despliegue Continuo
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- No existe.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- GitHub Actions + Docker.
+
+
+
+\---
+
+
+
+\### Monitoreo
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- No existe.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- Prometheus y Grafana.
+
+
+
+\---
+
+
+
+\### Reentrenamiento
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- No existe.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- Reentrenamiento basado en monitoreo.
+
+
+
+\---
+
+
+
+\### Escalabilidad
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- Limitada a contenedor local.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- Escalable mediante Kubernetes.
+
+
+
+\---
+
+
+
+\### Gobierno del Modelo
+
+
+
+\*\*Propuesta Inicial\*\*
+
+\- No existe.
+
+
+
+\*\*Propuesta Reestructurada\*\*
+
+\- Versionamiento y trazabilidad completa.
+
+
+
+\---
 
 
 
