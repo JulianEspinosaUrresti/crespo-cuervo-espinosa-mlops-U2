@@ -1,382 +1,139 @@
-\# CHANGELOG
+# CHANGELOG
 
+## Comparación entre la Propuesta Inicial y la Propuesta Reestructurada con MLOps
 
+### Modelo
 
-\## Comparación entre la Propuesta Inicial y la Propuesta Reestructurada con MLOps
+**Propuesta Inicial**
 
+- Simulación basada en reglas.
 
+**Propuesta Reestructurada**
 
-\### Modelo
+- Modelos de Machine Learning entrenados.
 
+### Framework API
 
+**Propuesta Inicial**
 
-\*\*Propuesta Inicial\*\*
+- Flask.
 
-\- Simulación basada en reglas.
+**Propuesta Reestructurada**
 
+- FastAPI.
 
+### Contenerización
 
-\*\*Propuesta Reestructurada\*\*
+**Propuesta Inicial**
 
-\- Modelos de Machine Learning entrenados.
+- Docker.
 
+**Propuesta Reestructurada**
 
+- Docker + Kubernetes.
 
-\---
+### Datos
 
+**Propuesta Inicial**
 
+- Entrada manual desde formulario.
 
-\### Framework API
+**Propuesta Reestructurada**
 
+- Pipeline de datos estructurado.
 
+### Validación de Datos
 
-\*\*Propuesta Inicial\*\*
+**Propuesta Inicial**
 
-\- Flask.
+- No implementada.
 
+**Propuesta Reestructurada**
 
+- Great Expectations.
 
-\*\*Propuesta Reestructurada\*\*
+### Procesamiento
 
-\- FastAPI.
+**Propuesta Inicial**
 
+- No definido formalmente.
 
+**Propuesta Reestructurada**
 
-\---
+- Pandas y Scikit-Learn.
 
+### Entrenamiento
 
+**Propuesta Inicial**
 
-\### Contenerización
+- No existe.
 
+**Propuesta Reestructurada**
 
+- Pipeline automatizado de entrenamiento.
 
-\*\*Propuesta Inicial\*\*
+### Evaluación
 
-\- Docker.
+**Propuesta Inicial**
 
+- No existe.
 
+**Propuesta Reestructurada**
 
-\*\*Propuesta Reestructurada\*\*
+- Accuracy, Precision, Recall, F1-Score y ROC-AUC.
 
-\- Docker + Kubernetes.
+### Versionamiento de Modelos
 
+**Propuesta Inicial**
 
+- No existe.
 
-\---
+**Propuesta Reestructurada**
 
+- MLflow.
 
+### Monitoreo
 
-\### Gestión de Datos
+**Propuesta Inicial**
 
+- No existe.
 
+**Propuesta Reestructurada**
 
-\*\*Propuesta Inicial\*\*
+- Prometheus y Grafana.
 
-\- Entrada manual desde formulario.
+### Automatización
 
+**Propuesta Inicial**
 
+- Procesos manuales.
 
-\*\*Propuesta Reestructurada\*\*
+**Propuesta Reestructurada**
 
-\- Pipeline de datos estructurado.
+- GitHub Actions para CI/CD.
 
+### Escalabilidad
 
+**Propuesta Inicial**
 
-\---
+- Limitada a una única instancia.
 
+**Propuesta Reestructurada**
 
+- Arquitectura escalable basada en Kubernetes.
 
-\### Validación de Datos
+### Beneficios Obtenidos
 
+- Mayor trazabilidad de experimentos y modelos.
+- Automatización del ciclo de vida de Machine Learning.
+- Mejor calidad y validación de datos.
+- Escalabilidad para ambientes productivos.
+- Despliegues reproducibles y consistentes.
+- Monitoreo continuo de infraestructura y modelos.
+- Gobierno y control de versiones de artefactos de Machine Learning.
 
+## Resumen Ejecutivo
 
-\*\*Propuesta Inicial\*\*
+La propuesta inicial cumplía el objetivo de demostrar un servicio básico para clasificación de pacientes mediante reglas de negocio. Sin embargo, carecía de capacidades para gestionar el ciclo de vida completo de un modelo de Machine Learning.
 
-\- No implementada.
-
-
-
-\*\*Propuesta Reestructurada\*\*
-
-\- Great Expectations.
-
-
-
-\---
-
-
-
-\### Procesamiento
-
-
-
-\*\*Propuesta Inicial\*\*
-
-\- No definido formalmente.
-
-
-
-\*\*Propuesta Reestructurada\*\*
-
-\- Pandas y Scikit-Learn.
-
-
-
-\---
-
-
-
-\### Entrenamiento
-
-
-
-\*\*Propuesta Inicial\*\*
-
-\- No existe.
-
-
-
-\*\*Propuesta Reestructurada\*\*
-
-\- Pipeline automatizado.
-
-
-
-\---
-
-
-
-\### Evaluación
-
-
-
-\*\*Propuesta Inicial\*\*
-
-\- No existe.
-
-
-
-\*\*Propuesta Reestructurada\*\*
-
-\- Accuracy, Precision, Recall, F1 Score y ROC-AUC.
-
-
-
-\---
-
-
-
-\### Versionamiento de Modelos
-
-
-
-\*\*Propuesta Inicial\*\*
-
-\- No existe.
-
-
-
-\*\*Propuesta Reestructurada\*\*
-
-\- MLflow Model Registry.
-
-
-
-\---
-
-
-
-\### Seguimiento de Experimentos
-
-
-
-\*\*Propuesta Inicial\*\*
-
-\- No existe.
-
-
-
-\*\*Propuesta Reestructurada\*\*
-
-\- MLflow Tracking.
-
-
-
-\---
-
-
-
-\### Integración Continua
-
-
-
-\*\*Propuesta Inicial\*\*
-
-\- No existe.
-
-
-
-\*\*Propuesta Reestructurada\*\*
-
-\- GitHub Actions.
-
-
-
-\---
-
-
-
-\### Despliegue Continuo
-
-
-
-\*\*Propuesta Inicial\*\*
-
-\- No existe.
-
-
-
-\*\*Propuesta Reestructurada\*\*
-
-\- GitHub Actions + Docker.
-
-
-
-\---
-
-
-
-\### Monitoreo
-
-
-
-\*\*Propuesta Inicial\*\*
-
-\- No existe.
-
-
-
-\*\*Propuesta Reestructurada\*\*
-
-\- Prometheus y Grafana.
-
-
-
-\---
-
-
-
-\### Reentrenamiento
-
-
-
-\*\*Propuesta Inicial\*\*
-
-\- No existe.
-
-
-
-\*\*Propuesta Reestructurada\*\*
-
-\- Reentrenamiento basado en monitoreo.
-
-
-
-\---
-
-
-
-\### Escalabilidad
-
-
-
-\*\*Propuesta Inicial\*\*
-
-\- Limitada a contenedor local.
-
-
-
-\*\*Propuesta Reestructurada\*\*
-
-\- Escalable mediante Kubernetes.
-
-
-
-\---
-
-
-
-\### Gobierno del Modelo
-
-
-
-\*\*Propuesta Inicial\*\*
-
-\- No existe.
-
-
-
-\*\*Propuesta Reestructurada\*\*
-
-\- Versionamiento y trazabilidad completa.
-
-
-
-\---
-
-
-
-\## Resumen de Mejoras Incorporadas
-
-
-
-\### Datos
-
-
-
-\- Se incorpora una capa formal de validación.
-
-\- Se definen procesos de transformación y limpieza.
-
-
-
-\### Modelos
-
-
-
-\- Se reemplaza la simulación por modelos entrenables.
-
-\- Se incorpora versionamiento y trazabilidad.
-
-
-
-\### DevOps
-
-
-
-\- Se agrega integración continua.
-
-\- Se agrega despliegue continuo.
-
-\- Se incorpora contenerización escalable.
-
-
-
-\### Operación
-
-
-
-\- Se incorpora monitoreo.
-
-\- Se incorpora detección de degradación.
-
-\- Se incorpora reentrenamiento continuo.
-
-
-
-\### MLOps
-
-
-
-La nueva propuesta cubre el ciclo de vida completo de un modelo de Machine Learning, desde la captura de datos hasta el monitoreo y mantenimiento en producción.
-
+La propuesta reestructurada incorpora principios MLOps mediante automatización, validación de datos, versionamiento de modelos, monitoreo y despliegue escalable, permitiendo una solución preparada para entornos empresariales y productivos.
