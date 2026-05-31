@@ -42,8 +42,6 @@
 
 | Gobierno del modelo | No existe | Versionamiento y trazabilidad completa |
 
-\---
-
 
 
 \## Resumen de Mejoras Incorporadas
